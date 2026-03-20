@@ -37,6 +37,7 @@ dependencies:
   http: ^1.6.0
   flutter_svg: ^2.2.4
   google_fonts: ^8.0.2
+  shared_preferences: ^2.5.4
 
 dev_dependencies:
   flutter_test:
@@ -60,10 +61,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/event.svg
-    - assets/images/profile.svg
-    - assets/images/task.svg
-    - assets/images/team.svg
     - assets/images/
 
 
