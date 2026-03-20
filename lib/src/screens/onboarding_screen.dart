@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'login_screen.dart';
 import '../constants/app_colors.dart';
 
-// ĐÂY LÀ WIDGET CON (ĐÃ SỬA: Bỏ text cứng dưới ảnh SVG)
 class _OnboardingPage extends StatelessWidget {
   final String assetPath;
 
@@ -131,7 +131,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 height: 60,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryGreen,
+                    backgroundColor: AppColors.primary,
                     shape: const StadiumBorder(),
                     elevation: 0,
                   ),
@@ -144,7 +144,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       );
                     } else {
                       // Xử lý khi nhấn START (Ví dụ: Navigator.push qua màn Home)
-                      print("Navigate to Home");
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      );
                     }
                   },
                   child: Text(
