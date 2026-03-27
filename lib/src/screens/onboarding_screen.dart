@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'login_screen.dart';
 import '../constants/app_colors.dart';
 
 class _OnboardingPage extends StatelessWidget {
@@ -11,7 +10,6 @@ class _OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      // SỬA ĐỔI 2: CHỈ hiển thị ảnh SVG căn giữa màn hình
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -21,8 +19,6 @@ class _OnboardingPage extends StatelessWidget {
             fit: BoxFit.contain,
             placeholderBuilder: (context) => const CircularProgressIndicator(),
           ),
-          // Bạn có thể thêm một chút khoảng trống ở đây nếu muốn
-          // const SizedBox(height: 100),
         ],
       ),
     );
@@ -41,7 +37,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
-  // Dữ liệu chỉ còn chứa asset path của các ảnh chính
   final List<String> _pageAssets = [
     'assets/images/task.svg',
     'assets/images/event.svg',
@@ -53,21 +48,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
-    double screenHeight = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom;
+    double screenHeight =
+        MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     final double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
-      backgroundColor: Colors.white, // Đặt nền trắng cho app
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // const Spacer(flex: 2),
             Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.1), // Khoảng cách linh hoạt từ đỉnh
+              padding: EdgeInsets.only(top: screenHeight * 0.1),
               child: SvgPicture.asset(
                 'assets/images/logo.svg',
-                height: screenHeight * 0.05, // Cố định chiều cao nhỏ để tránh chiếm chỗ
+                height: screenHeight * 0.05,
                 fit: BoxFit.contain,
               ),
             ),
@@ -77,12 +75,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // PAGEVIEW CHỈ CHỨA SVG
                   SizedBox(
-                    height: screenHeight * 0.35, // Chiếm tối đa 35% chiều cao màn hình
+                    height: screenHeight * 0.35,
                     child: PageView.builder(
                       controller: _pageController,
-                      onPageChanged: (index) => setState(() => _currentIndex = index),
+                      onPageChanged: (index) =>
+                          setState(() => _currentIndex = index),
                       itemCount: _pageAssets.length,
                       itemBuilder: (context, index) {
                         return Center(
@@ -99,10 +97,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
 
-                  // KHOẢNG CÁCH NHỎ GIỮA SVG VÀ INDICATOR
                   SizedBox(height: screenHeight * 0.03),
 
-                  // INDICATOR (Nằm ngoài PageView nên KHÔNG trượt theo)
+                  // INDICATOR
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(_pageAssets.length, (i) {
@@ -143,18 +140,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         curve: Curves.easeInOut,
                       );
                     } else {
-                      // Xử lý khi nhấn START (Ví dụ: Navigator.push qua màn Home)
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignInScreen(),
-                        ),
-                      );
+                      print("Navigate to Home");
                     }
                   },
                   child: Text(
-                    _currentIndex == _pageAssets.length - 1 ? "Start" : "Continue",
-                    style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    _currentIndex == _pageAssets.length - 1
+                        ? "Start"
+                        : "Continue",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

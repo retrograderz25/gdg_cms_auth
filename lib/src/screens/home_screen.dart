@@ -20,13 +20,13 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.logout),
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
-              await prefs.remove('accessToken'); // Quan trọng nhất: Xóa token
+              await prefs.remove('accessToken');
 
               if (context.mounted) {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const SignInScreen()),
-                      (route) => false,
+                  (route) => false,
                 );
               }
             },
@@ -62,10 +62,20 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildMenuCard(context, Icons.article, "Posts", AppColors.blue),
-                  _buildMenuCard(context, Icons.event, "Events", AppColors.yellow),
+                  _buildMenuCard(
+                    context,
+                    Icons.article,
+                    "Posts",
+                    AppColors.blue,
+                  ),
+                  _buildMenuCard(
+                    context,
+                    Icons.event,
+                    "Events",
+                    AppColors.yellow,
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -73,7 +83,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuCard(BuildContext context, IconData icon, String title, Color color) {
+  Widget _buildMenuCard(
+    BuildContext context,
+    IconData icon,
+    String title,
+    Color color,
+  ) {
     return Container(
       width: 120,
       padding: const EdgeInsets.all(16),
